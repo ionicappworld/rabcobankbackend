@@ -16,8 +16,6 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.rabco.report.pojo.CustomerStatements;
 
 public class CsvFileParserTest {
@@ -25,7 +23,9 @@ public class CsvFileParserTest {
 
 
 	
-
+	/**
+	 * test case to test if the parser object is not empty when file is available 
+	 */
 	@Test
 	public void readCsvFileData() {
 		CSVParser parser = null;
@@ -52,32 +52,10 @@ public class CsvFileParserTest {
 		}
 	}
 	
-	@Test
-	public void readCsvFileDataFail() {
-		CSVParser parser = null;
 
-		try {
-			ClassLoader classLoader = getClass().getClassLoader();
-			File file = new File(classLoader.getResource("records.csv").getFile());
-			CSVFormat csvFileFormat = CSVFormat.RFC4180.withHeader().withDelimiter(',');
-			parser = new CSVParser(new FileReader(file), csvFileFormat);
-			assertFalse(parser.getRecords().isEmpty());			
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			try {
-				parser.close();
-			} catch (IOException e) {
-				System.out.println("Error while closing fileReader/csvFileParser !!!");
-				e.printStackTrace();
-			}
-		}
-	}
-	
+	/**
+	 * test case to pass on correct backend computation 
+	 */
 	@Test
 	public void writeValidtedReportCsv() {
 		
@@ -126,6 +104,9 @@ public class CsvFileParserTest {
 
 	}
 	
+	/**
+	 * test case to fail on wrong backend computation 
+	 */
 	@Test
 	public void writeValidtedReportCsvFail() {
 		

@@ -23,6 +23,9 @@ public class CsvFileParser {
 	final static Logger logger = Logger.getLogger(CsvFileParser.class);
 
 
+	/**
+	 * method to parse CSV file from resource folder
+	 */
 	public void readCsvFileData() {
 		CSVParser parser = null;
 
@@ -59,6 +62,10 @@ public class CsvFileParser {
 			}
 		}
 	}
+	
+	/**
+	 * method to validate parsed data and generated validated report CSV file from resource folder
+	 */
 
 	private void writeValidtedReportCsv(List<CustomerStatements> stataments) {
 

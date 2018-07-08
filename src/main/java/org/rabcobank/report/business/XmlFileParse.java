@@ -18,6 +18,9 @@ import org.rabco.report.pojo.Records;
 public class XmlFileParse {
 	final static Logger logger = Logger.getLogger(CsvFileParser.class);
 
+	/**
+	 * method to parse XML file from resource folder
+	 */
 	public void readAndValidateXml() {
 		try {
 			// getting the xml file to read
@@ -35,10 +38,14 @@ public class XmlFileParse {
 
 			writeValidtedReportXMl(statments);
 		} catch (Exception e) {
-			logger.info("Error while readAndValidateXml !!!"+e.getMessage());
+			logger.info("Error while readAndValidateXml !!!" + e.getMessage());
 		}
 	}
 
+	/**
+	 * method to validate parsed data and generated validated report CSV file
+	 * from resource folder
+	 */
 	private void writeValidtedReportXMl(Records records) {
 
 		FileWriter fileWriter = null;
@@ -82,8 +89,8 @@ public class XmlFileParse {
 				fileWriter.close();
 				csvFilePrinter.close();
 			} catch (IOException e) {
-				logger.info("Error while flushing/closing fileWriter/csvPrinter !!!"+e.getMessage());
-			
+				logger.info("Error while flushing/closing fileWriter/csvPrinter !!!" + e.getMessage());
+
 			}
 		}
 

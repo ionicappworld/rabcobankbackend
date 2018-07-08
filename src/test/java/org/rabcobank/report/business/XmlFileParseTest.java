@@ -1,6 +1,6 @@
 package org.rabcobank.report.business;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -20,7 +20,9 @@ import org.rabco.report.pojo.CustomerStatements;
 import org.rabco.report.pojo.Records;
 
 public class XmlFileParseTest {
-
+	/**
+	 * test case to test if the parser object is not empty when file is available 
+	 */
 	@Test
 	public void readAndValidateXml() {
 		try {
@@ -42,6 +44,10 @@ public class XmlFileParseTest {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * test case to pass on correct backend computation 
+	 */
 
 	@Test
 	public void writeValidtedReportXMl() {
@@ -83,6 +89,69 @@ public class XmlFileParseTest {
 				System.out.println("Sum of balance : " +(record.getStartBalance().add(record.getMutation())));
 				System.out.println("Total : " +(record.getStartBalance().add(record.getMutation())).compareTo(record.getEndBalance()));
 				assertTrue(record.getStartBalance().add(record.getMutation()).compareTo(record.getEndBalance())== 0);
+
+			}
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				fileWriter.flush();
+				fileWriter.close();
+				csvFilePrinter.close();
+			} catch (IOException e) {
+				System.out.println("Error while flushing/closing fileWriter/csvPrinter !!!");
+				e.printStackTrace();
+			}
+		}
+
+	}
+	
+
+	/**
+	 * test case to fail on wrong backend computation 
+	 */
+	@Test
+	public void writeValidtedReportFail() {
+		Records records = new Records();
+		List<ChildRecords> childrecords = new ArrayList<ChildRecords>() ;
+		ChildRecords cs1 = new ChildRecords();
+		cs1.setAccountNumber("testing1");
+		cs1.setDescription("testing1");
+		cs1.setEndBalance(new BigDecimal(45));
+		cs1.setMutation(new BigDecimal(11));
+		cs1.setReference(1234);
+		cs1.setStartBalance(new BigDecimal(11));
+		ChildRecords cs2 = new ChildRecords();
+		cs2.setAccountNumber("testing2");
+		cs2.setDescription("testing2");
+		cs2.setEndBalance(new BigDecimal(-2));
+		cs2.setMutation(new BigDecimal(-6));
+		cs2.setReference(1234);
+		cs2.setStartBalance(new BigDecimal(7));
+		childrecords.add(cs1);
+		childrecords.add(cs2);
+		records.setChildrecords(childrecords);
+		
+		FileWriter fileWriter = null;
+		CSVPrinter csvFilePrinter = null;
+		CSVFormat csvFileFormat = CSVFormat.DEFAULT.withRecordSeparator("\n");
+
+		try {
+			fileWriter = new FileWriter("ValidatedXmlReports.csv");
+			csvFilePrinter = new CSVPrinter(fileWriter, csvFileFormat);
+			for (ChildRecords record : records.getChildrecords()) {
+				List<String> validatedStats = new ArrayList<String>();
+				validatedStats.add(String.valueOf(record.getReference()));
+				validatedStats.add(record.getAccountNumber());
+				validatedStats.add(record.getDescription());
+				validatedStats.add(String.valueOf(record.getStartBalance()));
+				validatedStats.add(String.valueOf(record.getMutation()));
+				validatedStats.add(String.valueOf(record.getEndBalance()));
+				System.out.println("Sum of balance : " +(record.getStartBalance().add(record.getMutation())));
+				System.out.println("Total : " +(record.getStartBalance().add(record.getMutation())).compareTo(record.getEndBalance()));
+				assertFalse(record.getStartBalance().add(record.getMutation()).compareTo(record.getEndBalance())== 0);
 
 			}
 

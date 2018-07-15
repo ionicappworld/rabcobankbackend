@@ -1,19 +1,16 @@
 package org.rabcobank.report;
 
-import org.rabcobank.report.business.CsvFileParser;
-import org.rabcobank.report.business.XmlFileParse;
+import org.rabcobank.report.enums.FileTypes;
+import org.rabcobank.report.facade.ReportParserFacade;
 
 /**
- * Hello world!
+ * @author vinesh
  *
  */
-public class App 
-{
-    public static void main( String[] args )
-    {
-    	CsvFileParser CsvFileParserObj = new CsvFileParser();
-    	CsvFileParserObj.readCsvFileData();
-    	XmlFileParse xmlFileParseObj = new XmlFileParse(); 
-    	xmlFileParseObj.readAndValidateXml();
-    }
+public class App {
+	public static void main(String[] args) {
+		ReportParserFacade.parseAndGenerateReport(FileTypes.CSV);
+		ReportParserFacade.parseAndGenerateReport(FileTypes.XML);
+
+	}
 }

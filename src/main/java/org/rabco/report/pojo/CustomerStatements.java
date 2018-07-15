@@ -2,69 +2,96 @@ package org.rabco.report.pojo;
 
 import java.math.BigDecimal;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
+/**
+ * @author vinesh
+ *
+ */
+@XmlRootElement(name = "record")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CustomerStatements {
 	/**
 	 * 
 	 */
+	@XmlAttribute
 	private Integer reference;
 	private String accountNumber;
-	private BigDecimal start_Balance;
-	private BigDecimal mutation;	
+	private BigDecimal startBalance;
+	private BigDecimal mutation;
 	private String description;
-	
-	public CustomerStatements(Integer reference, String accountNumber,String description, BigDecimal start_Balance, BigDecimal mutation
-			, BigDecimal end_Balance) {
+	private BigDecimal endBalance;
+
+	public CustomerStatements(Integer reference, String accountNumber, String description, BigDecimal startBalance,
+			BigDecimal mutation, BigDecimal endBalance) {
 		super();
 		this.reference = reference;
 		this.accountNumber = accountNumber;
-		this.start_Balance = start_Balance;
+		this.startBalance = startBalance;
 		this.mutation = mutation;
 		this.description = description;
-		this.end_Balance = end_Balance;
+		this.endBalance = endBalance;
 	}
-	private BigDecimal end_Balance;
-	
-	public Integer getRefernece() {
+
+	public CustomerStatements() {
+	}
+
+	public Integer getReference() {
 		return reference;
 	}
-	public void setRefernece(Integer reference) {
+
+	public void setReference(Integer reference) {
 		this.reference = reference;
 	}
+
 	public String getAccountNumber() {
 		return accountNumber;
 	}
+
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
-	public BigDecimal getStart_Balance() {
-		return start_Balance;
+
+	public BigDecimal getStartBalance() {
+		return startBalance;
 	}
-	public void setStart_Balance(BigDecimal start_Balance) {
-		this.start_Balance = start_Balance;
+
+	public void setStartBalance(BigDecimal startBalance) {
+		this.startBalance = startBalance;
 	}
+
 	public BigDecimal getMutation() {
 		return mutation;
 	}
+
 	public void setMutation(BigDecimal mutation) {
 		this.mutation = mutation;
 	}
+
 	public String getDescription() {
 		return this.description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public BigDecimal getEnd_Balance() {
-		return end_Balance;
+
+	public BigDecimal getEndBalance() {
+		return endBalance;
 	}
-	public void setEnd_Balance(BigDecimal end_Balance) {
-		this.end_Balance = end_Balance;
+
+	public void setEndBalance(BigDecimal endBalance) {
+		this.endBalance = endBalance;
 	}
+
 	@Override
 	public String toString() {
 		return "CustomerStatements [reference=" + reference + ", accountNumber=" + accountNumber + ", start_Balance="
-				+ start_Balance + ", mutation=" + mutation + ", description=" + description + ", end_Balance="
-				+ end_Balance + "]";
+				+ startBalance + ", mutation=" + mutation + ", description=" + description + ", end_Balance="
+				+ endBalance + "]";
 	}
 
 }

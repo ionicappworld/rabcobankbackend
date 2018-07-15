@@ -1,5 +1,9 @@
 package org.rabco.report.pojo;
 
+/**
+ * @author vinesh
+ *
+ */
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -11,13 +15,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 
 public class Records {
-	
 
 	@XmlElement(name = "record")
-	private List<ChildRecords> childrecords = null;
-	
+	private List<CustomerStatements> childrecords = null;
 
-	public Records(List<ChildRecords> childrecords, String reference) {
+	public Records(List<CustomerStatements> childrecords) {
 		super();
 		this.childrecords = childrecords;
 	}
@@ -25,15 +27,11 @@ public class Records {
 	public Records() {
 	}
 
-	
-
-	
-
-	public List<ChildRecords> getChildrecords() {
+	public List<CustomerStatements> getChildrecords() {
 		return childrecords;
 	}
 
-	public void setChildrecords(List<ChildRecords> childrecords) {
+	public void setChildrecords(List<CustomerStatements> childrecords) {
 		this.childrecords = childrecords;
 	}
 
